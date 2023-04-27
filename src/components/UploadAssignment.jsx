@@ -34,26 +34,6 @@ function UploadAssignment() {
               placeholder="Enter assignment description"
               rows="5"
             />
-            {/* <input
-              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="description"
-              type="textbox"
-              placeholder="Enter assignment description"
-            /> */}
-          </div>
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 font-bold mb-2"
-              htmlFor="title"
-            >
-              Course Code
-            </label>
-            <input
-              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="title"
-              type="text"
-              placeholder="Enter Course Code"
-            />
           </div>
           <div className="mb-4">
             <label
@@ -66,6 +46,19 @@ function UploadAssignment() {
               className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="due-date"
               type="date"
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 font-bold mb-2"
+              htmlFor="time"
+            >
+              Time
+            </label>
+            <input
+              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="time"
+              type="time"
             />
           </div>
           <div className="mb-4">

@@ -7,6 +7,8 @@ import HomePage from "./pages/HomePage";
 import Enrollment from "./pages/Enrollment";
 import TempPage from "./pages/TempPage"
 import CourseDetailsPage from "./pages/AssignmentPage";
+import AllSubmissions from "./components/AllSubmissions";
+import CreateAssignment from "./pages/CreateAssignment";
 
 export default function App() {
   return (
@@ -50,6 +52,22 @@ export default function App() {
         element={
           <ProtectedRoute>
             <CourseDetailsPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/assignment/:assignmentId"
+        element={
+          <ProtectedRoute>
+            <AllSubmissions />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/assignment-create/:courseId"
+        element={
+          <ProtectedRoute>
+            <CreateAssignment />
           </ProtectedRoute>
         }
       />
