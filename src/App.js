@@ -7,8 +7,27 @@ import HomePage from "./pages/HomePage";
 import Enrollment from "./pages/Enrollment";
 import TempPage from "./pages/TempPage"
 import CourseDetailsPage from "./pages/AssignmentPage";
+import { useEffect } from "react";
+import { nclient } from "./config/client";
+import { useDispatch } from "react-redux";
+import { set_profile } from "./redux/actions";
+import { useNavigate } from "react-router-dom";
 
 export default function App() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  useEffect(() => {
+    nclient.get("student/profile", {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+        },
+        }).then((res) => {
+          dispatch(set_profile(res.data.user));
+        }).catch((err) => {
+          navigate("/login");
+        });
+  }, [])
+  
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
