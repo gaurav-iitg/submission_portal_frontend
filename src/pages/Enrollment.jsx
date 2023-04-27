@@ -4,9 +4,9 @@ import EnrollmentForm from "../components/EnrollmentForm";
 
 const Enrollment = () => {
   return (
-    <div class="flex flex-col h-screen">
+    <div className="flex flex-col h-screen">
       <Navbar />
-      <div class="flex-1">
+      <div className="flex-1">
         <EnrollmentForm />
       </div>
     </div>

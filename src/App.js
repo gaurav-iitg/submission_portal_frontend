@@ -1,14 +1,12 @@
 import "./App.css";
-import Navbar from "./components/Navbar";
 import LoginPage from "./components/LoginPage";
-import UploadAssignment from "./components/UploadAssignment";
-import EnrollmentForm from "./components/EnrollmentForm";
-import SideBar from "./components/SideBar";
 import { Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
+import CreateCourse from "./pages/CreateCourse";
 import HomePage from "./pages/HomePage";
 import Enrollment from "./pages/Enrollment";
 import TempPage from "./pages/TempPage"
+import CourseDetailsPage from "./pages/AssignmentPage";
 
 export default function App() {
   return (
@@ -20,6 +18,14 @@ export default function App() {
         element={
           <ProtectedRoute>
             <Enrollment />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/create-course"
+        element={
+          <ProtectedRoute>
+            <CreateCourse />
           </ProtectedRoute>
         }
       />
@@ -36,6 +42,14 @@ export default function App() {
         element={
           <ProtectedRoute>
             <TempPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/course/:courseId"
+        element={
+          <ProtectedRoute>
+            <CourseDetailsPage />
           </ProtectedRoute>
         }
       />

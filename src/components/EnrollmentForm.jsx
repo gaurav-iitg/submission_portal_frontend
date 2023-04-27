@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { joinCourse } from "../config/client";
 
 function EnrollmentForm() {
   const [courseId, setCourseId] = useState("");
@@ -6,7 +7,25 @@ function EnrollmentForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // TODO: handle form submission
+    const data = {
+      courseId: courseId,
+      enrollmentKey: enrollmentKey,
+    };
+    joinCourse(data).then((res) => {
+      if (res.status === 200) {
+        console.log("Successfully enrolled");
+        setCourseId("");
+        setEnrollmentKey("");
+      } else {
+        alert("Invalid Course Code or Enrollment Key");
+      }
+    });
+  };
+  const handleCourseChange = (event) => {
+    setCourseId(event.target.value);
+  };
+  const handleEnrollmentKeyChange = (event) => {
+    setEnrollmentKey(event.target.value);
   };
 
   return (
@@ -28,6 +47,8 @@ function EnrollmentForm() {
               id="title"
               type="text"
               placeholder="Enter Course Code"
+              value={courseId}
+              onChange={handleCourseChange}
             />
           </div>
           <div className="mb-4">
@@ -42,10 +63,12 @@ function EnrollmentForm() {
               id="title"
               type="text"
               placeholder="Enter Enrollment Key"
+              value={enrollmentKey}
+              onChange={handleEnrollmentKeyChange}
             />
           </div>
           <div className="flex justify-center">
-            <button className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+            <button onClick={handleSubmit} className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
               Enroll
             </button>
           </div>

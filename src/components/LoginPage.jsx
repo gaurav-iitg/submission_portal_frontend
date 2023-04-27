@@ -1,9 +1,14 @@
-import { useState,useEffect } from "react";
+import { useEffect } from "react";
 import logo from "../assests/logo.png";
 import microsoftLogo from "../assests/microsoft-logo.png";
 import { config } from "../config/config";
 import { nclient } from "../config/client";
+import { useDispatch } from "react-redux";
+import { set_profile } from "../redux/actions";
+import { useNavigate } from "react-router-dom";
 function LoginPage() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     try {
       // get token from url
@@ -17,15 +22,15 @@ function LoginPage() {
             Authorization: token,
             },
             }).then((res) => {
-              localStorage.setItem("name", res.data.user.name);
-              window.location.href = "/";
+              dispatch(set_profile(res.data.user));
+              navigate("/");
             });
         // redirect to home page
       }
     } catch (error) {
       
     }
-  }, []);
+  });
 
   const handleMicrosoftLogin = async () => {
     window.location.href = `${config.backendUrl}/auth/microsoft`;
