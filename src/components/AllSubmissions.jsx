@@ -1,9 +1,7 @@
 import React from "react";
 
-
 function AssignmentSubmissions({ submissions }) {
-
-    //Isme assignment type pass karke uske submissions nikalne hain
+  //Isme assignment type pass karke uske submissions nikalne hain
   return (
     <div className="container mx-auto px-4">
       <div className="py-6">
@@ -25,9 +23,7 @@ function AssignmentSubmissions({ submissions }) {
                   <td className="border px-4 py-2">{submission.studentName}</td>
                   <td className="border px-4 py-2">{submission.rollNumber}</td>
                   <td className="border px-4 py-2">
-                    <button
-                      className="text-blue-500 hover:text-blue-700"
-                    >
+                    <button className="text-blue-500 hover:text-blue-700">
                       View
                     </button>
                   </td>

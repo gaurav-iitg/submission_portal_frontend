@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import Submission from "../components/Submission";
 import AllSubmissions from "../components/AllSubmissions";
 import AssignmentEvaluation from "../components/AssignmentEvaluation";
+import NoCourseComponent from "../components/NoCourseComponent";
 
 const TempPage = () => {
   const submission = {
@@ -49,17 +50,37 @@ const TempPage = () => {
     },
   ];
 
+  const courses = [
+    {
+      courseName: "Course 1",
+      courseCode: "CSE 101",
+    },
+    {
+      courseName: "Course 2",
+      courseCode: "CSE 102",
+    },
+    {
+      courseName: "Course 3",
+      courseCode: "CSE 103",
+    },
+    {
+      courseName: "Course 4",
+      courseCode: "CSE 104",
+    },
+  ];
+
   return (
     <div className="flex flex-col h-screen">
       <Navbar />
       <div className="flex flex-row" style={{ height: `calc(100vh - 64px)` }}>
-        {/* <Sidebar className="w-1/5" /> */}
+        {/* <Sidebar className="w-1/5" cour/> */}
         {/* <AssignmentSidebar className="w-1/5" /> */}
-        <div className="w-4/5 flex flex-col bg-gray-100 overflow-y-auto">
+        <div className="flex flex-col bg-gray-100 overflow-y-auto">
           {/* <Assignment /> */}
           {/* <AssignmentEvaluation submission={submission} /> */}
           {/* <Submission /> */}
-          <AllSubmissions submissions={submissions}/>
+          {/* <AllSubmissions submissions={submissions}/> */}
+          <NoCourseComponent />
         </div>
       </div>
     </div>
