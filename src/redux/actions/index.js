@@ -13,3 +13,10 @@ export const add_course_tutoring = (data) => {
         payload: data
     }
 }
+
+export const add_course_enrolled = (data) => {
+    return {
+        type: actions.add_course_enrolled,
+        payload: data
+    }
+}
