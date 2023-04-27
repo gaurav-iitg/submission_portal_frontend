@@ -12,6 +12,8 @@ import { nclient } from "./config/client";
 import { useDispatch } from "react-redux";
 import { set_profile } from "./redux/actions";
 import { useNavigate } from "react-router-dom";
+import AllSubmissions from "./components/AllSubmissions";
+import CreateAssignment from "./pages/CreateAssignment";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -69,6 +71,22 @@ export default function App() {
         element={
           <ProtectedRoute>
             <CourseDetailsPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/assignment/:assignmentId"
+        element={
+          <ProtectedRoute>
+            <AllSubmissions />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/assignment-create/:courseId"
+        element={
+          <ProtectedRoute>
+            <CreateAssignment />
           </ProtectedRoute>
         }
       />
