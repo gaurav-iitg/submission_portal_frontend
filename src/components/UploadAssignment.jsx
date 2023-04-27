@@ -1,6 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
+import { nclient,formDataClient } from "../config/client"
+import { useNavigate } from "react-router-dom";
 
-function UploadAssignment() {
+function UploadAssignment(props) {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [dueDate, setDueDate] = useState("");
+  const [totalMarks, setTotalMarks] = useState("");
+  const [file, setFile] = useState(null);
+  const navigate = useNavigate();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = {
+      name: title, 
+      description, 
+      due_date: dueDate, 
+      total_marks: totalMarks
+    }
+    nclient.post(`/assignment/${props.courseId}`, data, {
+      headers: {
+        'Authorization': localStorage.getItem('token')
+      }
+    }).then(res => {
+      console.log(res.data);
+      const formData = new FormData();
+      formData.append("file", file);
+      formDataClient.post(`/assignment/add/${res.data.assignment._id}`, formData, {
+        headers: {
+          'Authorization': localStorage.getItem('token')
+        }
+      }).then(res => {
+        console.log(res.data);
+        navigate(`/course/${props.courseId}`);
+      }).catch(err => {
+        console.log(err)
+      })
+    }).catch(err => {
+      console.log(err)
+    })
+  };
   return (
     <div className="flex items-center h-full">
       <div className="w-2/3 max-w-lg mx-auto bg-gray-200 p-6 rounded-md">
@@ -18,6 +56,8 @@ function UploadAssignment() {
               id="title"
               type="text"
               placeholder="Enter assignment title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
             />
           </div>
           <div className="mb-4">
@@ -32,7 +72,9 @@ function UploadAssignment() {
               id="description"
               type="text"
               placeholder="Enter assignment description"
-              rows="5"
+              rows="4"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </div>
           <div className="mb-4">
@@ -40,25 +82,29 @@ function UploadAssignment() {
               className="block text-gray-700 font-bold mb-2"
               htmlFor="due-date"
             >
-              Due Date
+              Due Date Time
             </label>
             <input
               className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="due-date"
-              type="date"
+              type="datetime-local"
+              value={dueDate}
+              onChange={(e) => setDueDate(e.target.value)}
             />
           </div>
           <div className="mb-4">
             <label
               className="block text-gray-700 font-bold mb-2"
-              htmlFor="time"
+              htmlFor="due-date"
             >
-              Time
+              Total Marks
             </label>
             <input
               className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="time"
-              type="time"
+              id="due-date"
+              type="text"
+              value={totalMarks}
+              onChange={(e) => setTotalMarks(e.target.value)}
             />
           </div>
           <div className="mb-4">
@@ -68,10 +114,12 @@ function UploadAssignment() {
             >
               Upload File
             </label>
-            <input type="file" id="file" />
+            <input type="file" id="file" onChange={(e)=>setFile(e.target.files[0])}/>
           </div>
           <div className="flex justify-center">
-            <button className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+            <button 
+            onClick={handleSubmit}
+            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
               Upload
             </button>
           </div>

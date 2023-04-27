@@ -15,11 +15,10 @@ export const nclient = axios.create({
     },
 });
 
-const formDataClient = axios.create({
+export const formDataClient = axios.create({
     baseURL: config.backendUrl,
     headers: {
-      'Content-Type': 'multipart/form-data',
-      'Authorization': localStorage.getItem('token')
+      'Content-Type': 'multipart/form-data'
     },
   });
 

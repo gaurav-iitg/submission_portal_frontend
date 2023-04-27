@@ -5,12 +5,12 @@ import {useParams} from "react-router-dom";
 
 const CreateAssignment = () => {
     const courseId = useParams().courseId;
-  return (
-    <div className="flex flex-col h-screen">
-      <Navbar />
-      <UploadAssignment />
-    </div>
-  );
+    return (
+      <div className="flex flex-col h-screen">
+        <Navbar />
+        <UploadAssignment courseId={courseId}/>
+      </div>
+    );
 };
 
 export default CreateAssignment;

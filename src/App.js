@@ -28,7 +28,7 @@ export default function App() {
         }).catch((err) => {
           navigate("/login");
         });
-  }, [])
+  }, [dispatch,navigate])
   
   return (
     <Routes>
@@ -78,7 +78,7 @@ export default function App() {
         path="/assignment/:assignmentId"
         element={
           <ProtectedRoute>
-            <AllSubmissions />
+            <AllSubmissions submissions={[]}/>
           </ProtectedRoute>
         }
       />
