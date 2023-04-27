@@ -40,6 +40,12 @@ const profileReducer = (state=profile,action) => {
                 ...state,
                 courses_tutoring: [...state.courses_tutoring,course]
             }
+        case actions.add_course_enrolled:
+            let course2 = action.payload
+            return {
+                ...state,
+                courses_enrolled: [...state.courses_enrolled,course2]
+            }
         default:
             return state
     }

@@ -12,23 +12,23 @@ function Sidebar(props) {
 
   return (
     <div className="w-1/4 bg-gray-800 text-white p-4">
-      {/* <h2 className="text-2xl font-bold mb-8">Enrolled Courses</h2>
-      {coursesEnrolled.length === 0 ? (
-        <p className="text-gray-400 mb-6">No courses enrolled</p>
-      ) : (
-        <ul className="flex flex-col gap-6 mb-6">
-          {coursesEnrolled.map((course,index) => (
-            <li className="mb-2 cursor-pointer" key={course._id}>
-              <div onClick={()=>{props.setIdx(index); props.setIsEnrolled(true) }} className="block hover:text-gray-500 truncate">
-                {course.code} {course.name}
-              </div>
-            </li>
-          ))}
-        </ul>
-      )} */}
+      {!isprof ? (<h2 className="text-2xl font-bold mb-8">Enrolled Courses</h2>) : null }
+        {coursesEnrolled.length === 0 ? (
+          <p className="text-gray-400 mb-6">No courses enrolled</p>
+        ) : (
+          <ul className="flex flex-col gap-6 mb-6">
+            {coursesEnrolled.map((course,index) => (
+              <li className="mb-2 cursor-pointer" key={course._id}>
+                <div onClick={()=>{props.setIdx(index); props.setIsEnrolled(true) }} className="block hover:text-gray-500 truncate">
+                  {course.code} {course.name}
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
 
-      <h2 className="text-2xl font-bold mb-8">Courses Tutoring</h2>
-      {coursesTutoring.length === 0 ||  !isprof ? (
+      {coursesTutoring.length !== 0 ? (<h2 className="text-2xl font-bold mb-8">Courses Tutoring</h2>) : null }
+      {coursesTutoring.length === 0 ? (
         <p className="text-gray-400">No courses tutoring</p>
       ) : (
         <ul className="flex flex-col gap-6">

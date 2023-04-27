@@ -1,9 +1,14 @@
 import { useState } from "react";
-import { joinCourse } from "../config/client";
+import { nclient } from "../config/client";
+import { useDispatch } from "react-redux";
+import { add_course_enrolled } from "../redux/actions";
+import { useNavigate } from "react-router-dom";
 
 function EnrollmentForm() {
   const [courseId, setCourseId] = useState("");
   const [enrollmentKey, setEnrollmentKey] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -11,14 +16,16 @@ function EnrollmentForm() {
       courseId: courseId,
       enrollmentKey: enrollmentKey,
     };
-    joinCourse(data).then((res) => {
-      if (res.status === 200) {
-        console.log("Successfully enrolled");
-        setCourseId("");
-        setEnrollmentKey("");
-      } else {
-        alert("Invalid Course Code or Enrollment Key");
-      }
+    nclient.post("/student/join", data,{
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    }).then((res) => {
+      dispatch(add_course_enrolled(res.data.course));
+      alert("Successfully enrolled");
+      navigate("/");
+    }).catch((err) => {
+      alert(err.response.data.message);
     });
   };
   const handleCourseChange = (event) => {
