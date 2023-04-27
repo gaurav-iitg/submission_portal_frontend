@@ -19,7 +19,7 @@ function Sidebar(props) {
         <ul className="flex flex-col gap-6 mb-6">
           {coursesEnrolled.map((course,index) => (
             <li className="mb-2 cursor-pointer" key={course._id}>
-              <div onClick={()=>{props.setIdx(index); props.setIsEnrolled(true) }} className="block hover:text-gray-500 truncate">
+              <div onClick={()=>{props.setIdx(index); props.setIsEnrolled(true); }} className="block hover:text-gray-500 truncate">
                 {course.code} {course.name}
               </div>
             </li>
@@ -34,7 +34,7 @@ function Sidebar(props) {
         <ul className="flex flex-col gap-6">
           {coursesTutoring.map((course,index) => (
             <li className="mb-2 cursor-pointer" key={course._id}>
-              <div onClick={()=>{props.setIdx(index); props.setIsEnrolled(false);}} className="block hover:text-gray-500 truncate">
+              <div onClick={()=>{props.setIdx(index); props.setIsEnrolled(false); props.setHasClicked(true)}} className="block hover:text-gray-500 truncate">
               {course.code} {course.name}
               </div>
             </li>
