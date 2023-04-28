@@ -1,6 +1,5 @@
 import React from "react";
 import Navbar from "../components/Navbar";
-import NoCourseComponent from "../components/NoCourseComponent";
 import Loading from "../components/Loading";
 
 const TempPage = () => {

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { formDataClient, nclient } from "../config/client";
+import Loading from "./Loading";
 const Submission = ({ assId, dueDate, total_marks }) => {
   const [loaded, setLoaded] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -112,13 +113,11 @@ const Submission = ({ assId, dueDate, total_marks }) => {
         Authorization: localStorage.getItem("token"),
       },
     }).then((res)=>{
-      console.log(res.data.submission);
       formDataClient.post(`/submission/add/${res.data.submission._id}`, formData, {
         headers: {
           Authorization: localStorage.getItem("token"),
         },
       }).then((res)=>{
-        console.log(res.data);
       }).catch((err)=>{
         console.log(err);
       })
@@ -195,11 +194,7 @@ const Submission = ({ assId, dueDate, total_marks }) => {
       </div>
     </div>
   ) : (
-    <div className="bg-white rounded-lg shadow-md p-4 mb-4">
-      <h2 className="text-lg font-bold text-gray-900 mb-2">
-        Loading Submission Details
-      </h2>
-    </div>
+    <Loading />
   );
 };
 

@@ -22,7 +22,6 @@ function UploadAssignment(props) {
         'Authorization': localStorage.getItem('token')
       }
     }).then(res => {
-      console.log(res.data);
       const formData = new FormData();
       formData.append("file", file);
       formDataClient.post(`/assignment/add/${res.data.assignment._id}`, formData, {
@@ -30,7 +29,6 @@ function UploadAssignment(props) {
           'Authorization': localStorage.getItem('token')
         }
       }).then(res => {
-        console.log(res.data);
         navigate(`/course/${props.courseId}`);
       }).catch(err => {
         console.log(err)

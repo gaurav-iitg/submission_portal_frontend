@@ -21,7 +21,6 @@ function CourseCreationForm() {
           Authorization: localStorage.getItem("token"),
         },
       }).then((res) => {
-       console.log(res.data.course);
        dispatch(add_course_tutoring(res.data.course));
         navigate("/");
      }).catch((err) => {

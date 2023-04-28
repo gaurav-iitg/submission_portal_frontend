@@ -3,7 +3,7 @@ import loadingIcon from "../assets/loading.png";
 
 function Loading() {
   return (
-    <div className="h-screen w-screen flex justify-center items-center">
+    <div className="h-full w-full flex justify-center items-center">
       <img
         src={loadingIcon}
         alt="Loading..."

@@ -2,7 +2,6 @@ import React from "react";
 import Submission from "./Submission";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import Loading from "./Loading";
 
 function Assignment(props) {
   const profile = useSelector((state) => state.profile);
@@ -61,7 +60,7 @@ function Assignment(props) {
             <Link
               to={`/assignment/${props.course.assignments[props.index]._id}`}
             >
-              <div className="test-lg font-bold pl-2">See Submissions</div>
+              <div className="text-lg font-bold pl-2">See Submissions</div>
             </Link>
           ) : (
             <Submission assId={props.course.assignments[props.index]._id} dueDate={props.course.assignments[props.index].due_date} total_marks={props.course.assignments[props.index].total_marks}/>
