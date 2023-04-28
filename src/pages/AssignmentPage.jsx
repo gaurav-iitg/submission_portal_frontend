@@ -2,6 +2,7 @@ import React,{useEffect,useState} from "react";
 import Navbar from "../components/Navbar";
 import Assignment from "../components/Assignment";
 import AssignmentSidebar from "../components/AssignmentSidebar";
+import Loading from "../components/Loading";
 import {useParams} from "react-router-dom";
 import { nclient } from "../config/client";
 const CourseDetailsPage = () => {
@@ -28,11 +29,11 @@ const CourseDetailsPage = () => {
       <Navbar />
       {loaded ? (<div className="flex flex-row" style={{ height: `calc(100vh - 64px)` }}>
         <AssignmentSidebar className="w-1/5" course={course} setClicked={setClicked} setIndex={setIndex}/>
-        <div className="w-4/5 flex flex-col bg-gray-100 overflow-y-auto">
+        <div className="w-4/5 flex h-full flex-col bg-gray-100 overflow-y-auto">
           <Assignment course={course} clicked={clicked} index={index}/>
         </div>
       </div>) : (
-        <div>Loading</div>
+        <Loading />
       )}
     </div>
   );

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import logo from "../assests/logo.png";
-import microsoftLogo from "../assests/microsoft-logo.png";
+import logo from "../assets/logo.png";
+import microsoftLogo from "../assets/microsoft-logo.png";
 import { config } from "../config/config";
 import { nclient } from "../config/client";
 import { useDispatch } from "react-redux";

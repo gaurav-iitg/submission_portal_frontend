@@ -1,6 +1,6 @@
 import "../App.css";
 import React from "react";
-import logo from "../assests/logo.png";
+import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 

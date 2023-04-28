@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import NoCourseComponent from "../components/NoCourseComponent";
+import Loading from "../components/Loading";
 
 const TempPage = () => {
   // const submission = {
@@ -77,7 +78,8 @@ const TempPage = () => {
           {/* <AssignmentEvaluation submission={submission} /> */}
           {/* <Submission /> */}
           {/* <AllSubmissions submissions={submissions}/> */}
-          <NoCourseComponent />
+          {/* <NoCourseComponent /> */}
+          <Loading />
         </div>
       </div>
     </div>
