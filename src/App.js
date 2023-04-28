@@ -2,6 +2,7 @@ import "./App.css";
 import LoginPage from "./components/LoginPage";
 import { Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ProtectedRouteAdmin from "./components/ProtectedRouteAdmin"
 import CreateCourse from "./pages/CreateCourse";
 import HomePage from "./pages/HomePage";
 import Enrollment from "./pages/Enrollment";
@@ -16,6 +17,8 @@ import AllSubmissionPage from "./pages/AllSubmissionPage";
 import CreateAssignment from "./pages/CreateAssignment";
 import SubmissionPage from "./pages/SubmissionPage";
 import AddTApage from "./pages/AddTApage";
+import AdminLoginPage from "./pages/AdminLoginPage";
+import CreateFaculty from "./pages/CreateFacultyPage";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -106,6 +109,22 @@ export default function App() {
           <ProtectedRoute>
             <AddTApage />
           </ProtectedRoute>
+        }
+      />
+      <Route
+        exact
+        path="/admin/login"
+        element={
+          <AdminLoginPage />
+        }
+      />
+      <Route
+        exact
+        path="/admin"
+        element={
+          <ProtectedRouteAdmin>
+            <CreateFaculty />
+          </ProtectedRouteAdmin>
         }
       />
     </Routes>
