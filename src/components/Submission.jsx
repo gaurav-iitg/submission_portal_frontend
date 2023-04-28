@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { formDataClient, nclient } from "../config/client";
 import Loading from "./Loading";
+import { config } from "../config/config";
 const Submission = ({ assId, dueDate, total_marks }) => {
   const [loaded, setLoaded] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -148,7 +149,7 @@ const Submission = ({ assId, dueDate, total_marks }) => {
               className="text-blue-900 cursor-pointer"
               target="_blank"
               rel="noopener noreferrer"
-              href={`http://localhost:5000/submission/file/${submission._id}`}
+              href={`${config.backendUrl}/submission/file/${submission._id}`}
               >
                 {submission.file.filename}
             </a>

@@ -2,6 +2,7 @@ import React from "react";
 import Submission from "./Submission";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { config } from "../config/config";
 
 function Assignment(props) {
   const profile = useSelector((state) => state.profile);
@@ -46,7 +47,7 @@ function Assignment(props) {
                     className="text-blue-900 cursor-pointer"
                     target="_blank"
                     rel="noopener noreferrer"
-                    href={`http://localhost:5000/assignment/file/${
+                    href={`${config.backendUrl}/assignment/file/${
                       props.course.assignments[props.index]._id
                     }`}
                   >

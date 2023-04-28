@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { nclient } from "../config/client";
 import Loading from "./Loading";
+import { config } from "../config/config";
 
 const SubmissionDetails = ({ submissionId }) => {
   const [loaded, setLoaded] = useState(false);
@@ -9,6 +10,7 @@ const SubmissionDetails = ({ submissionId }) => {
     assignment: {
       _id: "",
       name: "",
+      total_marks: "",
     },
     student: {
       _id: "",
@@ -88,10 +90,10 @@ const SubmissionDetails = ({ submissionId }) => {
           <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">
-                File
+                Submitted File - {submission.file.filename}
               </label>
               <a
-                href={`http://localhost:5000/submission/file/${submissionId}`}
+                href={`${config.backendUrl}/submission/file/${submissionId}`}
                 target="_blank"
                 rel="noreferrer"
               >
@@ -129,7 +131,7 @@ const SubmissionDetails = ({ submissionId }) => {
                     Marks
                   </label>
                   <p className="text-gray-700 text-base">
-                    {submission.feedback.marks}
+                    {submission.feedback.marks}/{submission.assignment.total_marks}
                   </p>
                 </div>
                 <div className="mb-4">
@@ -137,7 +139,7 @@ const SubmissionDetails = ({ submissionId }) => {
                     Feedback Time
                   </label>
                   <span className="text-gray-700 text-base">
-                    {submission.feedback.time}
+                    {getStringTime(submission.feedback.time)}
                   </span>
                 </div>
                 <div className="mb-4">

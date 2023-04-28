@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import AllSubmissionPage from "./pages/AllSubmissionPage";
 import CreateAssignment from "./pages/CreateAssignment";
 import SubmissionPage from "./pages/SubmissionPage";
+import AddTApage from "./pages/AddTApage";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -96,6 +97,14 @@ export default function App() {
         element={
           <ProtectedRoute>
             <SubmissionPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/add-ta/:courseId"
+        element={
+          <ProtectedRoute>
+            <AddTApage />
           </ProtectedRoute>
         }
       />

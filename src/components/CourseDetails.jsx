@@ -73,6 +73,13 @@ function CourseDetails(props) {
             Create New Assignment
           </h1>
         </Link>) : null}
+        {isprof ? (
+          <Link to={`/add-ta/${course._id}`}>
+            <h1 className="text-2xl font-bold text-blue-900 mb-6">
+              Add TA to Course
+            </h1>
+          </Link>
+        ) : null}
       </div>
     </div>
   );
