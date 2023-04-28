@@ -12,16 +12,21 @@ function Assignment(props) {
       isTA = true;
     }
   });
+  const getStringTime = (dt) => {
+    const date = new Date(dt);
+    const readableTime = date.toLocaleString();
+    return readableTime;
+  }
   return props.clicked ? (
-    <div className="bg-gray-100">
-      <div className="max-w-7xl mx-auto p-8 ">
+    <div className="w-full bg-gray-100">
+      <div className="w-full mx-auto p-8 ">
         <div className="flex flex-col">
-          <div className="pr-8">
+          <div className="w-full pr-8">
             <h1 className="text-2xl font-bold text-gray-900 mb-2">
               {props.course.assignments[props.index].name}
             </h1>
             <p className="text-gray-700 mb-4">Course: {props.course.code}</p>
-            <p className="text-gray-700 mb-4">Due Date: {props.course.assignments[props.index].due_date}</p>
+            <p className="text-gray-700 mb-4">Due Date: {getStringTime(props.course.assignments[props.index].due_date)}</p>
             <p className="text-gray-700 mb-4">Total Marks: {props.course.assignments[props.index].total_marks}</p>
             <div className="mb-4">
               <h2 className="text-lg font-bold text-gray-900 mb-2">
@@ -54,7 +59,7 @@ function Assignment(props) {
               <div className="test-lg font-bold pl-2">See Submissions</div>
             </Link>
           ) : (
-            <Submission />
+            <Submission assId={props.course.assignments[props.index]._id} dueDate={props.course.assignments[props.index].due_date} total_marks={props.course.assignments[props.index].total_marks}/>
           )}
         </div>
       </div>
