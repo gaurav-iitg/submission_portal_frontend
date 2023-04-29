@@ -43,6 +43,7 @@ function Assignment(props) {
               </h2>
               <ul className="list-disc list-inside">
                 <li>
+                {props.course.assignments[props.index].file && props.course.assignments[props.index].file.filename && props.course.assignments[props.index].file.filename.length > 0 ? (
                   <a
                     className="text-blue-900 cursor-pointer"
                     target="_blank"
@@ -52,7 +53,9 @@ function Assignment(props) {
                     }`}
                   >
                     {props.course.assignments[props.index].file.filename}
-                  </a>
+                  </a>) : (
+                    <span className="text-gray-700">No files attached</span>
+                  )}
                 </li>
               </ul>
             </div>

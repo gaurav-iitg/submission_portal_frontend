@@ -70,6 +70,38 @@ const Submission = ({ assId, dueDate, total_marks }) => {
     }
     return tstr;
   };
+  const fetch = () => {
+    setDiff(difference(dueDate));
+    setIsOverdue(checkOverdue(dueDate));
+    nclient
+      .get(`/submission/check/${assId}`, {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      })
+      .then((res) => {
+        let sub = res.data.submission;
+        setSubmission({
+          _id:sub._id,
+          file: sub.file,
+          time: sub.time,
+          comment: sub.comment,
+          feedback: sub.feedback ? sub.feedback : {
+            _id:"",
+            comment: "",
+            marks: 0,
+            time: "",
+            faculty: {
+              name: "",
+            },
+          },
+        });
+        setIsSubmitted(true);
+      })
+      .catch((err) => {
+        setIsSubmitted(false);
+      });
+  };
   useEffect(() => {
     setLoaded(false);
     setDiff(difference(dueDate));
@@ -107,6 +139,11 @@ const Submission = ({ assId, dueDate, total_marks }) => {
   }, [assId,dueDate]);
   const handleUpload = (e) => {
     e.preventDefault();
+    if(file === null){
+      alert("Please select a file");
+      return;
+    }
+    setLoaded(false);
     const formData = new FormData();
     formData.append("file", file);
     nclient.post(`/submission/${assId}`, {comment:""} , {
@@ -119,11 +156,17 @@ const Submission = ({ assId, dueDate, total_marks }) => {
           Authorization: localStorage.getItem("token"),
         },
       }).then((res)=>{
+        fetch();
+        setLoaded(true);
       }).catch((err)=>{
         console.log(err);
+        fetch();
+        setLoaded(true);
       })
     }).catch((err)=>{
       console.log(err);
+      fetch();
+      setLoaded(true);
     })
   };
   return loaded ? (

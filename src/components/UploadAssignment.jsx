@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { nclient,formDataClient } from "../config/client"
 import { useNavigate } from "react-router-dom";
+import Loading from "./Loading";
 
 function UploadAssignment(props) {
   const [title, setTitle] = useState("");
@@ -8,6 +9,7 @@ function UploadAssignment(props) {
   const [dueDate, setDueDate] = useState("");
   const [totalMarks, setTotalMarks] = useState("");
   const [file, setFile] = useState(null);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,6 +19,7 @@ function UploadAssignment(props) {
       due_date: dueDate, 
       total_marks: totalMarks
     }
+    setLoading(true);
     nclient.post(`/assignment/${props.courseId}`, data, {
       headers: {
         'Authorization': localStorage.getItem('token')
@@ -29,15 +32,22 @@ function UploadAssignment(props) {
           'Authorization': localStorage.getItem('token')
         }
       }).then(res => {
+        setLoading(false);
         navigate(`/course/${props.courseId}`);
       }).catch(err => {
+        setLoading(false);
         console.log(err)
+        alert("Error uploading assignment")
       })
     }).catch(err => {
+      setLoading(false);
       console.log(err)
+      alert("Error uploading assignment")
     })
   };
-  return (
+  return loading ? (
+    <Loading />
+  ) :(
     <div className="flex items-center h-full">
       <div className="w-2/3 max-w-lg mx-auto bg-gray-200 p-6 rounded-md">
         <h2 className="text-xl font-bold mb-4 text-center">Upload Assignment</h2>
